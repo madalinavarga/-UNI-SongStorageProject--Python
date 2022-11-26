@@ -35,7 +35,7 @@ def read_input_from_user():
     params = input().split()
 
     if len(params) < 1:
-        print("No command given")
+        print("No command")
         return
 
     given_command = params[0].lower()
