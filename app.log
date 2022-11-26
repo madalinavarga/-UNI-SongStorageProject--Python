@@ -1,4 +1,6 @@
- WARNING: 26-Nov-22 09:50:28 - warningg
- ERROR: 26-Nov-22 09:50:28 - error
- INFO: 26-Nov-22 09:50:28 - info
- CRITICAL: 26-Nov-22 09:50:28 - critical
+ INFO: 26-Nov-22 16:19:56 - Starting the program
+ INFO: 26-Nov-22 16:19:56 - Reading input from user
+ INFO: 26-Nov-22 16:20:00 - Reading input from user
+ INFO: 26-Nov-22 16:20:03 - Reading input from user
+ ERROR: 26-Nov-22 16:20:12 - Error while executing the program
+ INFO: 26-Nov-22 16:20:12 - Ending the program
