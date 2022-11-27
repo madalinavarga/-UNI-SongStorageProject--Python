@@ -12,10 +12,12 @@ quit = False
 
 def execute_comand(params):
     logging.info(f'Given command: {params[0]}')
+    result = ""
 
     command = params[0].lower()
+    print(command, "execute command")
     if command == "add_song":
-        execute.add_song(params[1:])
+        result = execute.add_song(params[1:])
     elif command == "delete_song":
         execute.delete_song(params[1:])
     elif command == "modify_data":
@@ -26,7 +28,7 @@ def execute_comand(params):
         execute.create_save_list(params[1:])
     else:
         print("Unknown command")
-        return
+        return result
 
 
 def read_input_from_user():
@@ -43,9 +45,11 @@ def read_input_from_user():
     if given_command == "quit":
         global quit
         quit = True
+        logging.info("Quitting the program")
         return
 
-    execute_comand(params)
+    result = execute_comand(params)
+    return result
 
 
 def main():
@@ -53,7 +57,7 @@ def main():
     logging.info('Starting the program')
     try:
         while not quit:
-            read_input_from_user()
+            result = read_input_from_user()
     except:
         logging.error('Error while executing the program')
 

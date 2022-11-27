@@ -1,7 +1,23 @@
- INFO: 26-Nov-22 19:00:05 - Starting the program
- INFO: 26-Nov-22 19:00:05 - Reading input from user
- ERROR: 26-Nov-22 19:00:55 - Error while executing the program
- INFO: 26-Nov-22 19:00:55 - Ending the program
- INFO: 26-Nov-22 19:00:55 - Starting the program
- INFO: 26-Nov-22 19:00:55 - Reading input from user
- INFO: 26-Nov-22 19:01:00 - Ending the program
+ INFO: 27-Nov-22 14:05:47 - Starting the program
+ INFO: 27-Nov-22 14:05:47 - Reading input from user
+ INFO: 27-Nov-22 14:05:54 - Given command: add_song
+ ERROR: 27-Nov-22 14:05:54 - Error while executing the program
+ INFO: 27-Nov-22 14:05:54 - Ending the program
+ INFO: 27-Nov-22 14:05:54 - Starting the program
+ INFO: 27-Nov-22 14:05:54 - Reading input from user
+ INFO: 27-Nov-22 14:06:02 - Given command: add_song
+ INFO: 27-Nov-22 14:06:02 - Reading input from user
+ INFO: 27-Nov-22 14:06:28 - Given command: &
+ INFO: 27-Nov-22 14:06:28 - Reading input from user
+ INFO: 27-Nov-22 14:06:35 - Given command: add_song
+ INFO: 27-Nov-22 14:06:35 - Reading input from user
+ INFO: 27-Nov-22 14:06:42 - Given command: add_song
+ INFO: 27-Nov-22 14:06:42 - Reading input from user
+ INFO: 27-Nov-22 14:06:54 - Given command: add_song
+ INFO: 27-Nov-22 14:06:54 - Reading input from user
+ INFO: 27-Nov-22 14:08:33 - Given command: &
+ INFO: 27-Nov-22 14:08:33 - Reading input from user
+ INFO: 27-Nov-22 14:08:34 - Given command: &
+ INFO: 27-Nov-22 14:08:34 - Reading input from user
+ INFO: 27-Nov-22 14:08:36 - Quitting the program
+ INFO: 27-Nov-22 14:08:36 - Ending the program
