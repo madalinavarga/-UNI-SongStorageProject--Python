@@ -1,11 +1,7 @@
- INFO: 26-Nov-22 16:29:00 - Starting the program
- INFO: 26-Nov-22 16:29:00 - Reading input from user
- INFO: 26-Nov-22 16:29:08 - Given command: add_song
- ERROR: 26-Nov-22 16:29:08 - Error while executing the program
- INFO: 26-Nov-22 16:29:08 - Ending the program
- INFO: 26-Nov-22 16:29:08 - Starting the program
- INFO: 26-Nov-22 16:29:08 - Reading input from user
- INFO: 26-Nov-22 16:29:15 - Given command: add_song
- INFO: 26-Nov-22 16:29:15 - Sunt in modul 2
- INFO: 26-Nov-22 16:29:15 - Reading input from user
- INFO: 26-Nov-22 16:29:19 - Ending the program
+ INFO: 26-Nov-22 19:00:05 - Starting the program
+ INFO: 26-Nov-22 19:00:05 - Reading input from user
+ ERROR: 26-Nov-22 19:00:55 - Error while executing the program
+ INFO: 26-Nov-22 19:00:55 - Ending the program
+ INFO: 26-Nov-22 19:00:55 - Starting the program
+ INFO: 26-Nov-22 19:00:55 - Reading input from user
+ INFO: 26-Nov-22 19:01:00 - Ending the program
