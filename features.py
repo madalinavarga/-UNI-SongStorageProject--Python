@@ -1,10 +1,10 @@
-# from Main import setup_logging
 import logging
 import redis
 import json
+import os
 from json import JSONEncoder
+from shutil import copy as copy_file
 
-# setup_logging()
 
 db = redis.Redis(
     host='redis-15187.c300.eu-central-1-1.ec2.cloud.redislabs.com',
@@ -26,7 +26,7 @@ class CustomEncoder(json.JSONEncoder):
         return o.__dict__
 
 
-def get_id():
+def get_id_and_increment():
     current_id = "0"
     try:
         last_id = db.get("ids")
@@ -45,8 +45,22 @@ def get_id():
         exit
 
 
+def check_files_extension(path):
+    print("path:", path)
+    allowed_type = ["mp3", "wav", "png"]
+    try:
+        filename, file_extension = os.path.splitext(path)
+        print(file_extension)
+        if file_extension[1:] not in allowed_type:
+            return False
+        return True
+    except Exception as err:
+        logging.error(f"Error extension file not allowed: {err}")
+
+
 def add_song(params):
     try:
+        print("paramsin add method", params)
         logging.info(f'start add_song')
 
         if len(params) < 5:
@@ -54,15 +68,21 @@ def add_song(params):
             logging.warning('Wrong number of parameters for add_song')
             return
 
-        new_song = Song(params[0], params[1], params[2], params[3], params[4])
-        id = get_id()
-        new_song_to_string = json.dumps(new_song, indent=4, cls=CustomEncoder)
-        db.set(id, new_song_to_string)
+        path = params[0]
+        if check_files_extension(path):
+            copy_file(path, "./Storage")
+            new_song = Song(path, params[1], params[2], params[3], params[4])
+            id = get_id_and_increment()
+            new_song_to_string = json.dumps(
+                new_song, indent=4, cls=CustomEncoder)
+            db.set(id, new_song_to_string)
 
-        logging.info("add_song method end. Song with id {id} was added in db")
+        logging.info(f"add_song method end. Song with id {id} was added in db")
+        print("Song added")
         return id
 
-    except:
+    except Exception as err:
+        logging.error(f"Error while adding song: {err}")
         print("eroare")
 
 

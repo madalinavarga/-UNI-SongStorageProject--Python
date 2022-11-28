@@ -1,23 +1,6 @@
- INFO: 27-Nov-22 14:05:47 - Starting the program
- INFO: 27-Nov-22 14:05:47 - Reading input from user
- INFO: 27-Nov-22 14:05:54 - Given command: add_song
- ERROR: 27-Nov-22 14:05:54 - Error while executing the program
- INFO: 27-Nov-22 14:05:54 - Ending the program
- INFO: 27-Nov-22 14:05:54 - Starting the program
- INFO: 27-Nov-22 14:05:54 - Reading input from user
- INFO: 27-Nov-22 14:06:02 - Given command: add_song
- INFO: 27-Nov-22 14:06:02 - Reading input from user
- INFO: 27-Nov-22 14:06:28 - Given command: &
- INFO: 27-Nov-22 14:06:28 - Reading input from user
- INFO: 27-Nov-22 14:06:35 - Given command: add_song
- INFO: 27-Nov-22 14:06:35 - Reading input from user
- INFO: 27-Nov-22 14:06:42 - Given command: add_song
- INFO: 27-Nov-22 14:06:42 - Reading input from user
- INFO: 27-Nov-22 14:06:54 - Given command: add_song
- INFO: 27-Nov-22 14:06:54 - Reading input from user
- INFO: 27-Nov-22 14:08:33 - Given command: &
- INFO: 27-Nov-22 14:08:33 - Reading input from user
- INFO: 27-Nov-22 14:08:34 - Given command: &
- INFO: 27-Nov-22 14:08:34 - Reading input from user
- INFO: 27-Nov-22 14:08:36 - Quitting the program
- INFO: 27-Nov-22 14:08:36 - Ending the program
+ INFO: 28-Nov-22 19:06:41 - Starting the program
+ INFO: 28-Nov-22 19:06:41 - Reading input from user
+ INFO: 28-Nov-22 19:06:49 - Given command: add_song
+ INFO: 28-Nov-22 19:06:49 - start add_song
+ INFO: 28-Nov-22 19:06:49 - add_song method end. Song with id 3 was added in db
+ INFO: 28-Nov-22 19:06:49 - Reading input from user
