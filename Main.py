@@ -76,7 +76,8 @@ def main():
     try:
         while not quit:
             result = read_input_and_execute()
-            print("Result: ", result)
+            if result is not None:
+                print("Result: ", result)
     except Exception as err:
         logging.error(f'Error while executing the program: {err}')
 

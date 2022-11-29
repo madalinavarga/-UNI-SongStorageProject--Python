@@ -6,10 +6,11 @@ from json import JSONEncoder
 from shutil import copy as copy_file
 
 
-db = redis.Redis(
+db = redis.StrictRedis(
     host='redis-15187.c300.eu-central-1-1.ec2.cloud.redislabs.com',
     port=15187,
-    password='1KUpJnGql9sO5JwSz2hrXhipmffFXBNU')
+    password='1KUpJnGql9sO5JwSz2hrXhipmffFXBNU',
+    decode_responses=True)
 
 
 class Song:
@@ -88,7 +89,28 @@ def add_song(params):
 
 
 def delete_song(params):
-    print(params)
+    id = params[0]
+    try:
+        logging.info(f'start delete_song')
+        song = db.get(id)
+        if song is not None:
+            db.delete(id)
+            song_as_dict = json.loads(song)
+            # aici sau in add ?
+            file_path_from_db = song_as_dict.get("file_name")
+            file_name = os.path.basename(os.path.normpath(file_path_from_db))
+            file_path_in_Storage = f".Storage/{file_name}"
+            if os.path.exists(file_path_in_Storage):
+                print("File found")
+                os.remove(file_path_in_Storage)
+            else:
+                print("Can not delete the file as it doesn't exists")
+                logging.error("Can not delete the file as it doesn't exists")
+        else:
+            print("Song id not found")
+            logging.info(f"Song id={id} not found")
+    except Exception as err:
+        logging.error(f"Error while deleting song: {err}")
     return
 
 
