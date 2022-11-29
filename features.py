@@ -68,7 +68,10 @@ def add_song(params):
         path = params[0]
         if check_files_extension_and_path(path):
             copy_file(path, "./Storage")
-            new_song = Song(path, params[1], params[2], params[3], params[4])
+            file_name = os.path.basename(os.path.normpath(path))
+            file_path_in_Storage = f".Storage/{file_name}"
+            new_song = Song(file_path_in_Storage,
+                            params[1], params[2], params[3], params[4])
             id = get_id_and_increment()
             new_song_to_string = json.dumps(
                 new_song, indent=4, cls=CustomEncoder)
@@ -95,14 +98,11 @@ def delete_song(params):
         song = db.get(id)
         if song is not None:
             song_as_dict = json.loads(song)
-            # aici sau in add ?
-            file_path_from_db = song_as_dict.get("file_name")
-            file_name = os.path.basename(os.path.normpath(file_path_from_db))
-            file_path_in_Storage = f".Storage/{file_name}"
-            if os.path.exists(file_path_in_Storage):
+            file_path = song_as_dict.get("file_name")
+            if os.path.exists(file_path):
                 print("File found")
-                os.remove(file_path_in_Storage)
-                logging.info(f"File {file_name} was deleted")
+                os.remove(file_path)
+                logging.info(f"File was deleted")
             else:
                 print("Can not delete the file as it doesn't exists")
                 logging.error("Can not delete the file as it doesn't exists")
