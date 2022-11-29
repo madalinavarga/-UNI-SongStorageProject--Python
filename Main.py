@@ -1,5 +1,6 @@
 import features as execute
 import logging
+import os
 
 
 def setup_logging():
@@ -12,10 +13,11 @@ quit = False
 
 def execute_comand(params):
     logging.info(f'Given command: {params[0]}')
+    result = ""
 
     command = params[0].lower()
     if command == "add_song":
-        execute.add_song(params[1:])
+        result = execute.add_song(params[1:])
     elif command == "delete_song":
         execute.delete_song(params[1:])
     elif command == "modify_data":
@@ -26,16 +28,17 @@ def execute_comand(params):
         execute.create_save_list(params[1:])
     else:
         print("Unknown command")
-        return
+        return result
 
 
-def read_input_from_user():
+def read_input_and_execute():
     logging.info('Reading input from user')
     print("Type command: ")
     params = input().split()
 
     if len(params) < 1:
         print("No command")
+        logging.error('No command')
         return
 
     given_command = params[0].lower()
@@ -43,19 +46,39 @@ def read_input_from_user():
     if given_command == "quit":
         global quit
         quit = True
+        logging.info("Quitting the program")
         return
 
-    execute_comand(params)
+    result = execute_comand(params)
+    return result
+
+
+def create_storage_directory_if_not_exist():
+    path = "./Storage"
+    global quit
+
+    try:
+        isExist = os.path.exists(path)
+
+        if not isExist:
+            os.makedirs(path)
+            print("The new directory is created!")
+    except Exception as err:
+        logging.error(f"Error while creating song directory: {err}")
+        print("Error while creating song directory")
+        quit = True
 
 
 def main():
     setup_logging()
+    create_storage_directory_if_not_exist()
     logging.info('Starting the program')
     try:
         while not quit:
-            read_input_from_user()
-    except:
-        logging.error('Error while executing the program')
+            result = read_input_and_execute()
+            print("Result: ", result)
+    except Exception as err:
+        logging.error(f'Error while executing the program: {err}')
 
     logging.info('Ending the program')
 
