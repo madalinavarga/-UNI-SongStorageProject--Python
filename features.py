@@ -117,7 +117,23 @@ def delete_song(params):
 
 
 def modify_data(params):
-    print(params)
+    logging.info(f'start modify_data')
+    id = params[0]
+    try:
+        song = db.get(id)
+        if song is not None:
+            song_as_dict = json.loads(song)
+            new_fields = {}
+            for i in range(1, len(params)):
+                field, value = params[i].split("=")
+                new_fields[field] = value
+            song_as_dict.update(new_fields)
+            new_song = Song(song_as_dict.get("file_name"), song_as_dict.get("singer"), song_as_dict.get(
+                "song_name"), song_as_dict.get("song_date"), song_as_dict.get("tags"))
+            db.set(id, new_song)
+    except Exception as err:
+        logging.exception(f"Error while modifying song: {err}")
+
     return
 
 
