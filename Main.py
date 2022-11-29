@@ -38,6 +38,7 @@ def read_input_and_execute():
 
     if len(params) < 1:
         print("No command")
+        logging.error('No command')
         return
 
     given_command = params[0].lower()

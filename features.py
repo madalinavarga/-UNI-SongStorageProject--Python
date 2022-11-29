@@ -45,41 +45,42 @@ def get_id_and_increment():
         exit
 
 
-def check_files_extension(path):
-    print("path:", path)
+def check_files_extension_and_path(path):
     allowed_type = ["mp3", "wav", "png"]
-    try:
-        filename, file_extension = os.path.splitext(path)
-        print(file_extension)
-        if file_extension[1:] not in allowed_type:
-            return False
-        return True
-    except Exception as err:
-        logging.error(f"Error extension file not allowed: {err}")
+    if not os.path.exists(path):
+        return False
+    filename, file_extension = os.path.splitext(path)
+    if file_extension[1:] not in allowed_type:
+        return False
+    return True
 
 
 def add_song(params):
     try:
-        print("paramsin add method", params)
         logging.info(f'start add_song')
 
         if len(params) < 5:
             print("Wrong number of parameters")
-            logging.warning('Wrong number of parameters for add_song')
+            logging.error('Wrong number of parameters for add_song')
             return
 
         path = params[0]
-        if check_files_extension(path):
+        if check_files_extension_and_path(path):
             copy_file(path, "./Storage")
             new_song = Song(path, params[1], params[2], params[3], params[4])
             id = get_id_and_increment()
             new_song_to_string = json.dumps(
                 new_song, indent=4, cls=CustomEncoder)
             db.set(id, new_song_to_string)
-
-        logging.info(f"add_song method end. Song with id {id} was added in db")
-        print("Song added")
-        return id
+            logging.info(
+                f"add_song method end. Song with id {id} was added in db")
+            print("Song added")
+            return id
+        else:
+            print("Wrong file type or path")
+            logging.error(
+                "Error extension file not allowed or file doesn't exist")
+            return
 
     except Exception as err:
         logging.error(f"Error while adding song: {err}")

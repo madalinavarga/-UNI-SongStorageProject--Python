@@ -1,6 +1,8 @@
- INFO: 28-Nov-22 19:06:41 - Starting the program
- INFO: 28-Nov-22 19:06:41 - Reading input from user
- INFO: 28-Nov-22 19:06:49 - Given command: add_song
- INFO: 28-Nov-22 19:06:49 - start add_song
- INFO: 28-Nov-22 19:06:49 - add_song method end. Song with id 3 was added in db
- INFO: 28-Nov-22 19:06:49 - Reading input from user
+ INFO: 29-Nov-22 07:18:12 - Starting the program
+ INFO: 29-Nov-22 07:18:12 - Reading input from user
+ INFO: 29-Nov-22 07:18:22 - Given command: add_song
+ INFO: 29-Nov-22 07:18:22 - start add_song
+ ERROR: 29-Nov-22 07:18:22 - Error extension file not allowed or file doesn't exist
+ INFO: 29-Nov-22 07:18:22 - Reading input from user
+ INFO: 29-Nov-22 07:18:26 - Quitting the program
+ INFO: 29-Nov-22 07:18:26 - Ending the program
