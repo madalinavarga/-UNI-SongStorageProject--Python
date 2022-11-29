@@ -94,7 +94,6 @@ def delete_song(params):
         logging.info(f'start delete_song')
         song = db.get(id)
         if song is not None:
-            db.delete(id)
             song_as_dict = json.loads(song)
             # aici sau in add ?
             file_path_from_db = song_as_dict.get("file_name")
@@ -103,9 +102,12 @@ def delete_song(params):
             if os.path.exists(file_path_in_Storage):
                 print("File found")
                 os.remove(file_path_in_Storage)
+                logging.info(f"File {file_name} was deleted")
             else:
                 print("Can not delete the file as it doesn't exists")
                 logging.error("Can not delete the file as it doesn't exists")
+            db.delete(id)
+            logging.info(f"Song with id {id} was deleted from db")
         else:
             print("Song id not found")
             logging.info(f"Song id={id} not found")
