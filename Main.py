@@ -21,7 +21,7 @@ def execute_comand(params):
     elif command == "delete_song":
         execute.delete_song(params[1:])
     elif command == "modify_data":
-        execute.modify_data(params[1:])
+        result = execute.modify_data(params[1:])
     elif command == "search":
         execute.search(params[1:])
     elif command == "create_save_list":

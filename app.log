@@ -1,11 +1,8 @@
- INFO: 29-Nov-22 07:51:59 - Starting the program
- INFO: 29-Nov-22 07:51:59 - Reading input from user
- INFO: 29-Nov-22 07:52:27 - Given command: add_song
- INFO: 29-Nov-22 07:52:27 - start add_song
- INFO: 29-Nov-22 07:52:27 - add_song method end. Song with id 7 was added in db
- INFO: 29-Nov-22 07:52:27 - Reading input from user
- INFO: 29-Nov-22 07:52:33 - Given command: delete_song
- INFO: 29-Nov-22 07:52:33 - start delete_song
- INFO: 29-Nov-22 07:52:34 - Reading input from user
- INFO: 29-Nov-22 07:53:18 - Quitting the program
- INFO: 29-Nov-22 07:53:18 - Ending the program
+ INFO: 30-Nov-22 12:52:02 - Starting the program
+ INFO: 30-Nov-22 12:52:02 - Reading input from user
+ INFO: 30-Nov-22 12:52:15 - Given command: modify_data
+ INFO: 30-Nov-22 12:52:15 - start modify_data
+ INFO: 30-Nov-22 12:52:15 - modify_data method end
+ INFO: 30-Nov-22 12:52:15 - Reading input from user
+ INFO: 30-Nov-22 12:52:19 - Quitting the program
+ INFO: 30-Nov-22 12:52:19 - Ending the program

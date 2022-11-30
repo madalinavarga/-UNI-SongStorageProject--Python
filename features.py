@@ -119,7 +119,18 @@ def delete_song(params):
 def modify_data(params):
     logging.info(f'start modify_data')
     id = params[0]
+
     try:
+        # check params and format
+        if (len(params) < 1):
+            logging.error("Wrong number of parameters")
+            return
+        else:
+            for i in range(1, len(params)):
+                if (params[i].find("=") == -1):
+                    logging.error("Wrong format of parameters")
+                    print("Wrong format of parameters. Return")
+                    return
         song = db.get(id)
         if song is not None:
             song_as_dict = json.loads(song)
@@ -130,11 +141,14 @@ def modify_data(params):
             song_as_dict.update(new_fields)
             new_song = Song(song_as_dict.get("file_name"), song_as_dict.get("singer"), song_as_dict.get(
                 "song_name"), song_as_dict.get("song_date"), song_as_dict.get("tags"))
-            db.set(id, new_song)
+            new_song_to_string = json.dumps(
+                new_song, indent=4, cls=CustomEncoder)
+            db.set(id, new_song_to_string)
     except Exception as err:
         logging.exception(f"Error while modifying song: {err}")
 
-    return
+    logging.info(f"modify_data method end")
+    return id
 
 
 def search(params):
