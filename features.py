@@ -206,8 +206,8 @@ def play(params):
                 mixer.music.stop()
                 mixer.quit()
         else:
-            logging.error("Many songs was founded. Introduce more filters")
-            print("Many songs was founded. Introduce more filters")
+            logging.error("Many songs were founded. Introduce more filters")
+            print("Many songs were founded. Introduce more filters")
 
     except Exception as err:
         logging.exception(f"Error while playing song: {err}")
