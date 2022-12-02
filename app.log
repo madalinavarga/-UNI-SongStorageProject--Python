@@ -1,7 +1,8 @@
- INFO: 02-Dec-22 17:01:38 - Starting the program
- INFO: 02-Dec-22 17:01:38 - Reading input from user
- INFO: 02-Dec-22 17:01:40 - Given command: create_save_list
- INFO: 02-Dec-22 17:01:40 - start create save list
- INFO: 02-Dec-22 17:01:40 - start search
- INFO: 02-Dec-22 17:01:40 - search method end
- INFO: 02-Dec-22 17:01:40 - Reading input from user
+ INFO: 02-Dec-22 21:09:20 - Starting the program
+ INFO: 02-Dec-22 21:09:20 - Reading input from user
+ INFO: 02-Dec-22 21:09:24 - Given command: search
+ INFO: 02-Dec-22 21:09:24 - start search method
+ INFO: 02-Dec-22 21:09:24 - search method end
+ INFO: 02-Dec-22 21:09:24 - Reading input from user
+ INFO: 02-Dec-22 21:10:02 - Quitting the program
+ INFO: 02-Dec-22 21:10:02 - Ending the program
