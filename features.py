@@ -152,10 +152,49 @@ def modify_data(params):
 
 
 def search(params):
-    print(params)
-    return
+    logging.info('start search')
+    filters = {}
+    result = []
+    isOk = True
+    try:
+        if len(params) < 1:
+            return
+
+        for i in range(0, len(params)):
+            field, value = params[i].split("=")
+            filters[field] = value
+
+        db_registrations = db.keys('[0-9]*')
+        if len(db_registrations) > 0:
+            for element in db_registrations:
+                iteam = db.get(element)
+                item_as_dict = json.loads(iteam)
+                for filter in filters.items():
+                    key, value = filter
+                    if item_as_dict.get(key) != filters.get(key):
+                        isOk = False
+                if isOk:
+                    result.append(item_as_dict)
+        else:
+            print("Data not found")
+            logging.info("Data not found")
+    except Exception as err:
+        logging.exception(f"Error while searching song: {err}")
+    logging.info('search method end')
+    return result
 
 
 def create_save_list(params):
     print(params)
     return
+
+
+def play():
+    print("play")
+    return
+
+
+def convert_dict_to_song(song_as_dict):
+    new_song = Song(song_as_dict.get("file_name"), song_as_dict.get("singer"), song_as_dict.get(
+        "song_name"), song_as_dict.get("song_date"), song_as_dict.get("tags"))
+    return new_song

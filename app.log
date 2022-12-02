@@ -1,8 +1,10 @@
- INFO: 30-Nov-22 12:52:02 - Starting the program
- INFO: 30-Nov-22 12:52:02 - Reading input from user
- INFO: 30-Nov-22 12:52:15 - Given command: modify_data
- INFO: 30-Nov-22 12:52:15 - start modify_data
- INFO: 30-Nov-22 12:52:15 - modify_data method end
- INFO: 30-Nov-22 12:52:15 - Reading input from user
- INFO: 30-Nov-22 12:52:19 - Quitting the program
- INFO: 30-Nov-22 12:52:19 - Ending the program
+ INFO: 02-Dec-22 09:34:14 - Starting the program
+ INFO: 02-Dec-22 09:34:14 - Reading input from user
+ INFO: 02-Dec-22 09:34:22 - Given command: serach
+ INFO: 02-Dec-22 09:34:22 - Reading input from user
+ INFO: 02-Dec-22 09:34:34 - Given command: search
+ INFO: 02-Dec-22 09:34:34 - start search
+ INFO: 02-Dec-22 09:34:34 - search method end
+ INFO: 02-Dec-22 09:34:34 - Reading input from user
+ INFO: 02-Dec-22 09:35:15 - Quitting the program
+ INFO: 02-Dec-22 09:35:15 - Ending the program
