@@ -23,9 +23,11 @@ def execute_comand(params):
     elif command == "modify_data":
         result = execute.modify_data(params[1:])
     elif command == "search":
-        execute.search(params[1:])
+        result = execute.search(params[1:])
     elif command == "create_save_list":
         execute.create_save_list(params[1:])
+    elif command == "play":
+        execute.play(params[1:])
     else:
         print("Unknown command")
         return result
