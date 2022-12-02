@@ -1,0 +1,5 @@
+-> check connection to db 
+-> modify add not allowed duplicate
+-> create a pattern for id 
+-> logging 
+-> search not case sensitive
