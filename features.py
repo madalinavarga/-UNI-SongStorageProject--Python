@@ -5,6 +5,7 @@ import os
 from json import JSONEncoder
 from shutil import copy as copy_file
 from pygame import mixer
+import zipfile
 
 db = redis.StrictRedis(
     host='redis-15187.c300.eu-central-1-1.ec2.cloud.redislabs.com',
@@ -51,7 +52,7 @@ def check_files_extension_and_path(path):
     allowed_type = ["mp3", "wav", "png", "mp4"]
     if not os.path.exists(path):
         return False
-    filename, file_extension = os.path.splitext(path)
+    _, file_extension = os.path.splitext(path)
     if file_extension[1:] not in allowed_type:
         return False
     return True
@@ -158,9 +159,6 @@ def search(params):
     result = []
     isOk = True
     try:
-        if len(params) < 1:
-            return
-
         for i in range(0, len(params)):
             field, value = params[i].split("=")
             filters[field] = value
@@ -187,7 +185,24 @@ def search(params):
 
 
 def create_save_list(params):
-    print(params)
+    try:
+        logging.info("start create save list")
+        path_archive = params[0]
+        _, file_extension = os.path.splitext(path_archive)
+        if file_extension != ".zip":
+            logging.error("Invalid output format")
+            print("Please, provide correct path")
+            return
+        zip_file = zipfile.ZipFile(path_archive, "w")
+
+        result = search(params[1:])
+        for item in result:
+            path = item["file_name"]
+            zip_file.write(path, path[10:])
+
+        return zip_file
+    except Exception as err:
+        logging.exception(err)
     return
 
 

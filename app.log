@@ -1,10 +1,7 @@
- INFO: 02-Dec-22 16:16:53 - Starting the program
- INFO: 02-Dec-22 16:16:53 - Reading input from user
- INFO: 02-Dec-22 16:17:01 - Given command: play
- INFO: 02-Dec-22 16:17:01 - start play
- INFO: 02-Dec-22 16:17:01 - start search
- INFO: 02-Dec-22 16:17:01 - search method end
- INFO: 02-Dec-22 16:17:01 - start check_files_extension_and_path
- INFO: 02-Dec-22 16:17:12 - Reading input from user
- INFO: 02-Dec-22 16:17:59 - Quitting the program
- INFO: 02-Dec-22 16:17:59 - Ending the program
+ INFO: 02-Dec-22 17:01:38 - Starting the program
+ INFO: 02-Dec-22 17:01:38 - Reading input from user
+ INFO: 02-Dec-22 17:01:40 - Given command: create_save_list
+ INFO: 02-Dec-22 17:01:40 - start create save list
+ INFO: 02-Dec-22 17:01:40 - start search
+ INFO: 02-Dec-22 17:01:40 - search method end
+ INFO: 02-Dec-22 17:01:40 - Reading input from user
