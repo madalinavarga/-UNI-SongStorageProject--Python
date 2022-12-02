@@ -4,7 +4,7 @@ import json
 import os
 from json import JSONEncoder
 from shutil import copy as copy_file
-
+from pygame import mixer
 
 db = redis.StrictRedis(
     host='redis-15187.c300.eu-central-1-1.ec2.cloud.redislabs.com',
@@ -47,7 +47,8 @@ def get_id_and_increment():
 
 
 def check_files_extension_and_path(path):
-    allowed_type = ["mp3", "wav", "png"]
+    logging.info("start check_files_extension_and_path")
+    allowed_type = ["mp3", "wav", "png", "mp4"]
     if not os.path.exists(path):
         return False
     filename, file_extension = os.path.splitext(path)
@@ -69,7 +70,7 @@ def add_song(params):
         if check_files_extension_and_path(path):
             copy_file(path, "./Storage")
             file_name = os.path.basename(os.path.normpath(path))
-            file_path_in_Storage = f".Storage/{file_name}"
+            file_path_in_Storage = f"./Storage/{file_name}"
             new_song = Song(file_path_in_Storage,
                             params[1], params[2], params[3], params[4])
             id = get_id_and_increment()
@@ -78,7 +79,7 @@ def add_song(params):
             db.set(id, new_song_to_string)
             logging.info(
                 f"add_song method end. Song with id {id} was added in db")
-            print("Song added")
+            print("Song added:", new_song_to_string)
             return id
         else:
             print("Wrong file type or path")
@@ -181,6 +182,7 @@ def search(params):
     except Exception as err:
         logging.exception(f"Error while searching song: {err}")
     logging.info('search method end')
+    print(result)
     return result
 
 
@@ -189,8 +191,26 @@ def create_save_list(params):
     return
 
 
-def play():
-    print("play")
+def play(params):
+    logging.info('start play')
+    try:
+        result = search(params)
+        if len(result) == 1:
+            path = result[0]['file_name']
+            print(path)
+            if check_files_extension_and_path(path):
+                mixer.init()
+                mixer.music.load(path)
+                mixer.music.play()
+                input("press ENTER to stop")
+                mixer.music.stop()
+                mixer.quit()
+        else:
+            logging.error("Many songs was founded. Introduce more filters")
+            print("Many songs was founded. Introduce more filters")
+
+    except Exception as err:
+        logging.exception(f"Error while playing song: {err}")
     return
 
 
