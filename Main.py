@@ -7,15 +7,13 @@ def setup_logging():
     logging.basicConfig(filename='app.log', filemode='w', level=logging.INFO,
                         format=' %(levelname)s: %(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 
-
 quit = False
-
 
 def execute_comand(params):
     logging.info(f'Given command: {params[0]}')
     result = None
-
     command = params[0].lower()
+    
     if command == "add_song":
         result = execute.add_song(params[1:])
     elif command == "delete_song":
@@ -54,6 +52,7 @@ def read_input_and_execute():
         return
 
     result = execute_comand(params)
+    
     return result
 
 
@@ -69,6 +68,7 @@ def create_storage_directory_if_not_exist():
             os.makedirs(path)
             print("The new directory is created!")
             logging.info("The new directory is created!")
+            
     except Exception as err:
         logging.exception(f"Error while creating song directory: {err}")
         print("Error while creating song directory")

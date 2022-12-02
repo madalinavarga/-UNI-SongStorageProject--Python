@@ -2,10 +2,10 @@ import logging
 import redis
 import json
 import os
-from json import JSONEncoder
+import json
+import zipfile
 from shutil import copy as copy_file
 from pygame import mixer
-import zipfile
 
 db = redis.StrictRedis(
     host='redis-15187.c300.eu-central-1-1.ec2.cloud.redislabs.com',
@@ -52,24 +52,29 @@ def check_files_extension_and_path(path):
     print("start check_files_extension_and_path method")
 
     allowed_type = ["mp3", "wav", "png", "mp4"]
+
     if not os.path.exists(path):
         logging.error("File doesn't exist")
         print("File doesn't exist")
         return False
 
     _, file_extension = os.path.splitext(path)
+
     if file_extension[1:] not in allowed_type:
         logging.error("File extension not allowed")
         print("File extension not allowed")
         return False
 
     new_path = f"./Storage{file_extension}"
+    
     if os.path.exists(new_path):
         logging.error("File already in storage")
         print("File already in storage")
         return False
+    
     logging.info("check_files_extension_and_path method end")
     print("check_files_extension_and_path method end")
+
     return True
 
 
@@ -99,7 +104,8 @@ def add_song(params):
                 f"add_song method end. Song with id {id} was added in db")
             print(f"add_song method end. Song with id {id} was added in db")
             return id
-        return
+        
+        return None
 
     except Exception as err:
         logging.error(f"Error while adding song: {err}")
@@ -131,6 +137,7 @@ def delete_song(params):
         else:
             print("Song id not found")
             logging.info(f"Song id={id} not found")
+
     except Exception as err:
         logging.error(f"Error while deleting song: {err}")
 
@@ -163,11 +170,13 @@ def modify_data(params):
             new_song_to_string = json.dumps(
                 new_song, indent=4, cls=CustomEncoder)
             db.set(id, new_song_to_string)
+
     except Exception as err:
         logging.exception(f"Error while modifying song: {err}")
 
     logging.info(f"modify_data method end")
     print("modify_data method end")
+
     return new_song_to_string
 
 
@@ -196,11 +205,14 @@ def search(params):
         else:
             print("Data not found")
             logging.info("Data not found")
+
     except Exception as err:
         logging.exception(f"Error while searching song: {err}")
+        
     logging.info('search method end')
     print(result)
     print("search method end")
+
     return result
 
 
@@ -222,9 +234,11 @@ def create_save_list(params):
             zip_file.write(path, path[10:])
 
         return zip_file
+
     except Exception as err:
         print("Error while creating save list")
         logging.exception(err)
+
     return None
 
 
@@ -249,12 +263,15 @@ def play(params):
 
     except Exception as err:
         logging.exception(f"Error while playing song: {err}")
+
     logging.info('End Play')
     print('End Play')
+
     return None
 
 
 def convert_dict_to_song(song_as_dict):
     new_song = Song(song_as_dict.get("file_name"), song_as_dict.get("singer"), song_as_dict.get(
         "song_name"), song_as_dict.get("song_date"), song_as_dict.get("tags"))
+
     return new_song
