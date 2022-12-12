@@ -179,12 +179,17 @@ def search(params):
     isOk = True
     try:
         for i in range(0, len(params)):
+            if "=" not in params[i]:
+                print("incorect params")
+                return None
+
             field, value = params[i].split("=")
             filters[field] = value
 
         db_registrations = db.keys("song-[0-9a-f]*")
         if len(db_registrations) > 0:
             for element in db_registrations:
+                isOk = True
                 iteam = db.get(element)
                 item_as_dict = json.loads(iteam)
                 for filter in filters.items():

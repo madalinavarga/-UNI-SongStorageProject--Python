@@ -1,9 +1,18 @@
- INFO: 12-Dec-22 07:57:36 - Starting the program
- INFO: 12-Dec-22 07:57:36 - Creating storage directory if not exist
- INFO: 12-Dec-22 07:57:36 - Reading input from user
- INFO: 12-Dec-22 07:57:37 - Given command: search
- INFO: 12-Dec-22 07:57:37 - start search method
- INFO: 12-Dec-22 07:57:38 - search method end
- INFO: 12-Dec-22 07:57:38 - Reading input from user
- INFO: 12-Dec-22 07:57:44 - Quitting the program
- INFO: 12-Dec-22 07:57:44 - Ending the program
+ INFO: 12-Dec-22 19:40:26 - Starting the program
+ INFO: 12-Dec-22 19:40:26 - Creating storage directory if not exist
+ INFO: 12-Dec-22 19:40:26 - Reading input from user
+ INFO: 12-Dec-22 19:40:45 - Given command: play
+ INFO: 12-Dec-22 19:40:45 - start play
+ INFO: 12-Dec-22 19:40:45 - start search method
+ INFO: 12-Dec-22 19:40:45 - search method end
+ INFO: 12-Dec-22 19:40:45 - start check_files_extension_and_path method
+ INFO: 12-Dec-22 19:40:45 - check_files_extension_and_path method end
+ INFO: 12-Dec-22 19:41:19 - End Play
+ INFO: 12-Dec-22 19:41:19 - Reading input from user
+ INFO: 12-Dec-22 19:42:29 - Given command: search
+ INFO: 12-Dec-22 19:42:29 - start search method
+ INFO: 12-Dec-22 19:42:29 - Reading input from user
+ INFO: 12-Dec-22 19:42:44 - Given command: search
+ INFO: 12-Dec-22 19:42:44 - start search method
+ INFO: 12-Dec-22 19:42:44 - search method end
+ INFO: 12-Dec-22 19:42:44 - Reading input from user
