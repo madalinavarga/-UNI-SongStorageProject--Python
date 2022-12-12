@@ -7,13 +7,15 @@ def setup_logging():
     logging.basicConfig(filename='app.log', filemode='w', level=logging.INFO,
                         format=' %(levelname)s: %(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 
+
 quit = False
+
 
 def execute_comand(params):
     logging.info(f'Given command: {params[0]}')
     result = None
     command = params[0].lower()
-    
+
     if command == "add_song":
         result = execute.add_song(params[1:])
     elif command == "delete_song":
@@ -52,7 +54,7 @@ def read_input_and_execute():
         return
 
     result = execute_comand(params)
-    
+
     return result
 
 
@@ -68,7 +70,7 @@ def create_storage_directory_if_not_exist():
             os.makedirs(path)
             print("The new directory is created!")
             logging.info("The new directory is created!")
-            
+
     except Exception as err:
         logging.exception(f"Error while creating song directory: {err}")
         print("Error while creating song directory")
@@ -76,10 +78,12 @@ def create_storage_directory_if_not_exist():
 
 
 def main():
-    logging.info('Starting the program')
     setup_logging()
-    create_storage_directory_if_not_exist()
+    logging.info('Starting the program')
+
     try:
+        create_storage_directory_if_not_exist()
+        describe_features()
         while not quit:
             result = read_input_and_execute()
             if result != None:
@@ -88,6 +92,16 @@ def main():
         logging.error(f'Error while executing the program: {err}')
 
     logging.info('Ending the program')
+
+
+def describe_features():
+    print("This is SongStorage project. What you can do: \n")
+    print("add_song path singer_name song_name date tags")
+    print("delete_song id")
+    print("modify_data id singer=test")
+    print("search singer=maluma")
+    print("create_save_list destinatie.zip singer=maluma")
+    print("play singer=maluma song=mama \n")
 
 
 main()

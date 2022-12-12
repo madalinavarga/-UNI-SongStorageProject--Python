@@ -1,8 +1,9 @@
- INFO: 02-Dec-22 21:09:20 - Starting the program
- INFO: 02-Dec-22 21:09:20 - Reading input from user
- INFO: 02-Dec-22 21:09:24 - Given command: search
- INFO: 02-Dec-22 21:09:24 - start search method
- INFO: 02-Dec-22 21:09:24 - search method end
- INFO: 02-Dec-22 21:09:24 - Reading input from user
- INFO: 02-Dec-22 21:10:02 - Quitting the program
- INFO: 02-Dec-22 21:10:02 - Ending the program
+ INFO: 12-Dec-22 07:57:36 - Starting the program
+ INFO: 12-Dec-22 07:57:36 - Creating storage directory if not exist
+ INFO: 12-Dec-22 07:57:36 - Reading input from user
+ INFO: 12-Dec-22 07:57:37 - Given command: search
+ INFO: 12-Dec-22 07:57:37 - start search method
+ INFO: 12-Dec-22 07:57:38 - search method end
+ INFO: 12-Dec-22 07:57:38 - Reading input from user
+ INFO: 12-Dec-22 07:57:44 - Quitting the program
+ INFO: 12-Dec-22 07:57:44 - Ending the program

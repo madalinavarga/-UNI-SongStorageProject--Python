@@ -4,14 +4,12 @@ import json
 import os
 import json
 import zipfile
+import redis
+import uuid
 from shutil import copy as copy_file
 from pygame import mixer
 
-db = redis.StrictRedis(
-    host='redis-15187.c300.eu-central-1-1.ec2.cloud.redislabs.com',
-    port=15187,
-    password='1KUpJnGql9sO5JwSz2hrXhipmffFXBNU',
-    decode_responses=True)
+db = redis.Redis(host='localhost', port=6379, db=0)
 
 
 class Song:
@@ -29,29 +27,22 @@ class CustomEncoder(json.JSONEncoder):
 
 
 def get_id_and_increment():
-    current_id = "0"
+    current_id = ''
     try:
-        last_id = db.get("ids")
-
-        if last_id is None:
-            db.set("ids", "0")
-            return current_id
-
-        current_id = str(int(last_id)+1)
-        db.set("ids", current_id)
-
-        return current_id
-
+        new_uuid = str(uuid.uuid4())
+        current_id = f'song-{new_uuid}'
     except:
         logging.error("Error while getting id from db")
         exit
+
+    return current_id
 
 
 def check_files_extension_and_path(path):
     logging.info("start check_files_extension_and_path method")
     print("start check_files_extension_and_path method")
 
-    allowed_type = ["mp3", "wav", "png", "mp4"]
+    allowed_type = ["mp3", "wav"]
 
     if not os.path.exists(path):
         logging.error("File doesn't exist")
@@ -66,12 +57,12 @@ def check_files_extension_and_path(path):
         return False
 
     new_path = f"./Storage{file_extension}"
-    
+
     if os.path.exists(new_path):
         logging.error("File already in storage")
         print("File already in storage")
         return False
-    
+
     logging.info("check_files_extension_and_path method end")
     print("check_files_extension_and_path method end")
 
@@ -104,7 +95,7 @@ def add_song(params):
                 f"add_song method end. Song with id {id} was added in db")
             print(f"add_song method end. Song with id {id} was added in db")
             return id
-        
+
         return None
 
     except Exception as err:
@@ -191,7 +182,7 @@ def search(params):
             field, value = params[i].split("=")
             filters[field] = value
 
-        db_registrations = db.keys('[0-9]*')
+        db_registrations = db.keys("song-[0-9a-f]*")
         if len(db_registrations) > 0:
             for element in db_registrations:
                 iteam = db.get(element)
@@ -208,9 +199,8 @@ def search(params):
 
     except Exception as err:
         logging.exception(f"Error while searching song: {err}")
-        
+
     logging.info('search method end')
-    print(result)
     print("search method end")
 
     return result
