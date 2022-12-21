@@ -2,9 +2,7 @@ import logging
 import redis
 import json
 import os
-import json
 import zipfile
-import redis
 import uuid
 from shutil import copy as copy_file
 from pygame import mixer
@@ -19,6 +17,8 @@ class Song:
         self.song_name = song_name
         self.song_date = song_date
         self.tags = tags
+        _, file_extension = os.path.splitext(file_name)
+        self.format = file_extension
 
 
 class CustomEncoder(json.JSONEncoder):
@@ -26,7 +26,7 @@ class CustomEncoder(json.JSONEncoder):
         return o.__dict__
 
 
-def get_id_and_increment():
+def get_new_id():
     current_id = ''
     try:
         new_uuid = str(uuid.uuid4())
@@ -56,13 +56,6 @@ def check_files_extension_and_path(path):
         print("File extension not allowed")
         return False
 
-    new_path = f"./Storage{file_extension}"
-
-    if os.path.exists(new_path):
-        logging.error("File already in storage")
-        print("File already in storage")
-        return False
-
     logging.info("check_files_extension_and_path method end")
     print("check_files_extension_and_path method end")
 
@@ -82,12 +75,18 @@ def add_song(params):
         path = params[0]
 
         if check_files_extension_and_path(path):
-            copy_file(path, "./Storage")
             extract_file_name = os.path.basename(os.path.normpath(path))
             file_path_in_Storage = f"./Storage/{extract_file_name}"
+
+            if os.path.exists(file_path_in_Storage):
+                logging.error("File already in storage")
+                print("File already in storage")
+                return False
+
+            copy_file(path, "./Storage")
             new_song = Song(file_path_in_Storage,
                             params[1], params[2], params[3], params[4])
-            id = get_id_and_increment()
+            id = get_new_id()
             new_song_to_string = json.dumps(
                 new_song, indent=4, cls=CustomEncoder)
             db.set(id, new_song_to_string)
@@ -107,7 +106,7 @@ def delete_song(params):
     logging.info('start delete_song method')
 
     try:
-        if (len(params) < 1):
+        if len(params) < 1:
             logging.error("Wrong number of parameters")
             print("Please provide an id")
             return None
@@ -138,14 +137,14 @@ def modify_data(params):
     print(f'start modify_data method')
 
     try:
-        if (len(params) < 1):
+        if len(params) < 1:
             logging.error("Wrong number of parameters")
             print("Wrong number of parameters")
             return None
         else:
             id = params[0]
             for i in range(1, len(params)):
-                if (params[i].find("=") == -1):
+                if params[i].find("=") == -1:
                     logging.error("Wrong format of parameters")
                     print("Wrong format of parameters. Return")
                     return None
@@ -190,8 +189,8 @@ def search(params):
         if len(db_registrations) > 0:
             for element in db_registrations:
                 isOk = True
-                iteam = db.get(element)
-                item_as_dict = json.loads(iteam)
+                item = db.get(element)
+                item_as_dict = json.loads(item)
                 for filter in filters.items():
                     key, value = filter
                     if item_as_dict.get(key).lower() != filters.get(key).lower():
@@ -244,7 +243,6 @@ def play(params):
         result = search(params)
         if len(result) == 1:
             path = result[0]['file_name']
-            print(path)
             if check_files_extension_and_path(path):
                 mixer.init()
                 mixer.music.load(path)

@@ -86,7 +86,7 @@ def main():
         describe_features()
         while not quit:
             result = read_input_and_execute()
-            if result != None:
+            if result is not None:
                 print("Result: ", result)
     except Exception as err:
         logging.error(f'Error while executing the program: {err}')
