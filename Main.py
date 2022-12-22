@@ -26,6 +26,8 @@ def execute_command(params):
 
     if command == "add_song":
         result = execute.add_song(params[1:])
+    elif command == "add_song_auto":
+        result = execute.add_song_auto(params[1:])
     elif command == "delete_song":
         execute.delete_song(params[1:])
     elif command == "modify_data":
@@ -118,6 +120,7 @@ def describe_features():
     """
     print("This is SongStorage project. What you can do: \n")
     print("add_song path singer_name song_name date tags")
+    print("add_song_auto path")
     print("delete_song id")
     print("modify_data id singer=test")
     print("search singer=maluma")
