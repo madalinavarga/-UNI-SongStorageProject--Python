@@ -4,6 +4,9 @@ import os
 
 
 def setup_logging():
+    """
+    Set up the configuration for logging
+    """
     logging.basicConfig(filename='app.log', filemode='w', level=logging.INFO,
                         format=' %(levelname)s: %(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 
@@ -11,7 +14,12 @@ def setup_logging():
 quit = False
 
 
-def execute_comand(params):
+def execute_command(params):
+    """
+    Map command to its corresponding method
+    :param params: command followed by parameters
+    :return: result of command
+    """
     logging.info(f'Given command: {params[0]}')
     result = None
     command = params[0].lower()
@@ -35,6 +43,10 @@ def execute_comand(params):
 
 
 def read_input_and_execute():
+    """
+    Read the input of the user and validate it
+    :return: Result of the command
+    """
     logging.info('Reading input from user')
     print("Type command: ")
     params = input().split()
@@ -53,12 +65,15 @@ def read_input_and_execute():
         print("Quitting the program")
         return
 
-    result = execute_comand(params)
+    result = execute_command(params)
 
     return result
 
 
 def create_storage_directory_if_not_exist():
+    """
+    Create a new storage directory if it does not exist
+    """
     logging.info('Creating storage directory if not exist')
     path = "./Storage"
     global quit
@@ -78,6 +93,9 @@ def create_storage_directory_if_not_exist():
 
 
 def main():
+    """
+    Starting point pf the application
+    """
     setup_logging()
     logging.info('Starting the program')
 
@@ -95,6 +113,9 @@ def main():
 
 
 def describe_features():
+    """
+    Helper method to describe how the application can be used
+    """
     print("This is SongStorage project. What you can do: \n")
     print("add_song path singer_name song_name date tags")
     print("delete_song id")

@@ -21,24 +21,28 @@ class Song:
         self.format = file_extension
 
 
-class CustomEncoder(json.JSONEncoder):
-    def default(self, o):
-        return o.__dict__
-
-
 def get_new_id():
+    """
+    Generate a unique id
+    :return: A new id
+    """
     current_id = ''
     try:
         new_uuid = str(uuid.uuid4())
         current_id = f'song-{new_uuid}'
-    except:
-        logging.error("Error while getting id from db")
-        exit
+    except Exception as err:
+        logging.error(f"Error while getting id from db {err}")
+        exit()
 
     return current_id
 
 
 def check_files_extension_and_path(path):
+    """
+    Check if file exists and the type is allowed.
+    :param path: path where the file is located
+    :return: False if file does not exist or is not in allowed types, True otherwise
+    """
     logging.info("start check_files_extension_and_path method")
     print("start check_files_extension_and_path method")
 
@@ -63,6 +67,11 @@ def check_files_extension_and_path(path):
 
 
 def add_song(params):
+    """
+    Add a new song to the Storage folder and save the metadata in database.
+    :param params:
+    :return: The id of the song if it was created successfully, otherwise None
+    """
     try:
         logging.info(f'start add_song method')
         print(f'start add_song method')
@@ -81,7 +90,7 @@ def add_song(params):
             if os.path.exists(file_path_in_Storage):
                 logging.error("File already in storage")
                 print("File already in storage")
-                return False
+                return None
 
             copy_file(path, "./Storage")
             new_song = Song(file_path_in_Storage,
@@ -99,10 +108,15 @@ def add_song(params):
 
     except Exception as err:
         logging.error(f"Error while adding song: {err}")
-        print("eroare")
+        print("error")
 
 
 def delete_song(params):
+    """
+    Delete a song by id.
+    :param params: id of the song
+    :return: None if there was an exception
+    """
     logging.info('start delete_song method')
 
     try:
@@ -133,8 +147,14 @@ def delete_song(params):
 
 
 def modify_data(params):
+    """
+    Modify metadata for an existing song in database
+    :param params: fields that should be updated
+    :return: None if an error occurred or the updated song
+    """
     logging.info(f'start modify_data method')
     print(f'start modify_data method')
+    new_song_to_string = ""
 
     try:
         if len(params) < 1:
@@ -163,6 +183,7 @@ def modify_data(params):
 
     except Exception as err:
         logging.exception(f"Error while modifying song: {err}")
+        return None
 
     logging.info(f"modify_data method end")
     print("modify_data method end")
@@ -171,15 +192,19 @@ def modify_data(params):
 
 
 def search(params):
+    """
+    Search songs based on given filters
+    :param params: filters
+    :return: Found songs
+    """
     logging.info('start search method')
     print('start search method')
     filters = {}
     result = []
-    isOk = True
     try:
         for i in range(0, len(params)):
             if "=" not in params[i]:
-                print("incorect params")
+                print("incorrect params")
                 return None
 
             field, value = params[i].split("=")
@@ -211,6 +236,11 @@ def search(params):
 
 
 def create_save_list(params):
+    """
+    Create a zip with all the songs found based on the filters
+    :param params: path to archive and song filters
+    :return: None if exceptions occurred otherwise location of the zip file
+    """
     try:
         logging.info("start create save list")
         print("start create save list")
@@ -232,11 +262,15 @@ def create_save_list(params):
     except Exception as err:
         print("Error while creating save list")
         logging.exception(err)
-
-    return None
+        return None
 
 
 def play(params):
+    """
+    Search a song by filters and play it
+    :param params: filters
+    :return: void
+    """
     logging.info('start play')
     print('start play')
     try:
@@ -260,11 +294,22 @@ def play(params):
     logging.info('End Play')
     print('End Play')
 
-    return None
-
 
 def convert_dict_to_song(song_as_dict):
+    """
+    Convert a dictionary to a Song object
+    :param song_as_dict: dictionary with key values strings
+    :return: Song object
+    """
     new_song = Song(song_as_dict.get("file_name"), song_as_dict.get("singer"), song_as_dict.get(
         "song_name"), song_as_dict.get("song_date"), song_as_dict.get("tags"))
 
     return new_song
+
+
+class CustomEncoder(json.JSONEncoder):
+    """
+    Helper method used by json. dumps to encode a song object as json
+    """
+    def default(self, o):
+        return o.__dict__
