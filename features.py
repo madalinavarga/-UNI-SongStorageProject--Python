@@ -6,6 +6,7 @@ import zipfile
 import uuid
 from shutil import copy as copy_file
 from pygame import mixer
+import eyed3
 
 db = redis.Redis(host='localhost', port=6379, db=0)
 
@@ -64,6 +65,64 @@ def check_files_extension_and_path(path):
     print("check_files_extension_and_path method end")
 
     return True
+
+
+def add_song_auto(params):
+    """
+    Add a new song to the Storage folder and extract the metadata automatically.
+    :param params: song file
+    :return: The id of the song if it was created successfully, otherwise None
+    """
+    try:
+        logging.info(f'start add_song_auto method')
+        print(f'start add_song_auto method')
+
+        if len(params) < 1:
+            print("Wrong number of parameters")
+            logging.error('Wrong number of parameters for add_song_auto')
+            return
+
+        path = params[0]
+
+        if check_files_extension_and_path(path):
+            extract_file_name = os.path.basename(os.path.normpath(path))
+            file_path_in_Storage = f"./Storage/{extract_file_name}"
+
+            if os.path.exists(file_path_in_Storage):
+                logging.error("File already in storage")
+                print("File already in storage")
+                return None
+
+            copy_file(path, "./Storage")
+
+            audiofile = eyed3.load(path)
+            singer = audiofile.tag.artist
+            song_name = audiofile.tag.title
+            song_date = audiofile.tag.getBestDate()
+            tags = ""
+            print(
+                f'Are you ok with those metadata? singer={singer} song_name={song_name} song_date={song_date} (y/n)')
+            answer = input()
+            if answer is not "y":
+                return None
+            new_song = Song(file_path_in_Storage, singer,
+                            song_name, song_date, tags)
+
+            id = get_new_id()
+            new_song_to_string = json.dumps(
+                new_song, indent=4, cls=CustomEncoder)
+            db.set(id, new_song_to_string)
+            logging.info(
+                f"add_song_auto method end. Song with id {id} was added in db")
+            print(
+                f"add_song_auto method end. Song with id {id} was added in db")
+            return id
+
+        return None
+
+    except Exception as err:
+        logging.error(f"Error while adding song: {err}")
+        print("error")
 
 
 def add_song(params):
@@ -311,5 +370,6 @@ class CustomEncoder(json.JSONEncoder):
     """
     Helper method used by json. dumps to encode a song object as json
     """
+
     def default(self, o):
         return o.__dict__

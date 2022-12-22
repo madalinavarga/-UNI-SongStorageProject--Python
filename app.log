@@ -1,31 +1,19 @@
- INFO: 21-Dec-22 21:51:10 - Starting the program
- INFO: 21-Dec-22 21:51:10 - Creating storage directory if not exist
- INFO: 21-Dec-22 21:51:10 - Reading input from user
- INFO: 21-Dec-22 21:51:16 - Given command: add_song
- INFO: 21-Dec-22 21:51:16 - start add_song method
- ERROR: 21-Dec-22 21:51:16 - Wrong number of parameters for add_song
- INFO: 21-Dec-22 21:51:16 - Reading input from user
- INFO: 21-Dec-22 21:51:36 - Given command: add_song
- INFO: 21-Dec-22 21:51:36 - start add_song method
- INFO: 21-Dec-22 21:51:36 - start check_files_extension_and_path method
- INFO: 21-Dec-22 21:51:36 - check_files_extension_and_path method end
- INFO: 21-Dec-22 21:51:36 - add_song method end. Song with id song-276eec42-5628-418a-909f-4710e7a4d50f was added in db
- INFO: 21-Dec-22 21:51:36 - Reading input from user
- INFO: 21-Dec-22 21:51:47 - Given command: play
- INFO: 21-Dec-22 21:51:47 - start play
- INFO: 21-Dec-22 21:51:47 - start search method
- INFO: 21-Dec-22 21:51:47 - search method end
- INFO: 21-Dec-22 21:51:47 - start check_files_extension_and_path method
- INFO: 21-Dec-22 21:51:47 - check_files_extension_and_path method end
- INFO: 21-Dec-22 21:51:53 - End Play
- INFO: 21-Dec-22 21:51:53 - Reading input from user
- INFO: 21-Dec-22 21:52:21 - Given command: play
- INFO: 21-Dec-22 21:52:21 - start play
- INFO: 21-Dec-22 21:52:21 - start search method
- INFO: 21-Dec-22 21:52:21 - search method end
- INFO: 21-Dec-22 21:52:21 - start check_files_extension_and_path method
- INFO: 21-Dec-22 21:52:21 - check_files_extension_and_path method end
- INFO: 21-Dec-22 21:52:25 - End Play
- INFO: 21-Dec-22 21:52:25 - Reading input from user
- INFO: 21-Dec-22 21:52:28 - Quitting the program
- INFO: 21-Dec-22 21:52:28 - Ending the program
+ INFO: 22-Dec-22 21:07:12 - Starting the program
+ INFO: 22-Dec-22 21:07:12 - Creating storage directory if not exist
+ INFO: 22-Dec-22 21:07:12 - Reading input from user
+ INFO: 22-Dec-22 21:07:42 - Given command: add_song_auto
+ INFO: 22-Dec-22 21:07:42 - start add_song_auto method
+ INFO: 22-Dec-22 21:07:42 - start check_files_extension_and_path method
+ INFO: 22-Dec-22 21:07:42 - check_files_extension_and_path method end
+ INFO: 22-Dec-22 21:07:48 - add_song_auto method end. Song with id song-5b9feab7-38a3-4378-8dae-92dea52aa600 was added in db
+ INFO: 22-Dec-22 21:07:48 - Reading input from user
+ INFO: 22-Dec-22 21:07:58 - Given command: play
+ INFO: 22-Dec-22 21:07:58 - start play
+ INFO: 22-Dec-22 21:07:58 - start search method
+ INFO: 22-Dec-22 21:07:58 - search method end
+ INFO: 22-Dec-22 21:07:58 - start check_files_extension_and_path method
+ INFO: 22-Dec-22 21:07:58 - check_files_extension_and_path method end
+ INFO: 22-Dec-22 21:08:01 - End Play
+ INFO: 22-Dec-22 21:08:01 - Reading input from user
+ INFO: 22-Dec-22 21:08:03 - Quitting the program
+ INFO: 22-Dec-22 21:08:03 - Ending the program
